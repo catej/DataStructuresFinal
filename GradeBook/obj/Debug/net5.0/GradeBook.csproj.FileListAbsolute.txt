@@ -1,0 +1,16 @@
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.exe
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.deps.json
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.runtimeconfig.json
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.runtimeconfig.dev.json
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.dll
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\ref\GradeBook.dll
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\bin\Debug\net5.0\GradeBook.pdb
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.csprojAssemblyReference.cache
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.GeneratedMSBuildEditorConfig.editorconfig
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.AssemblyInfoInputs.cache
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.AssemblyInfo.cs
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.csproj.CoreCompileInputs.cache
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.dll
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\ref\GradeBook.dll
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.pdb
+H:\current\MATC\2020\fall\data_structures\DataStructuresFinal\GradeBook\obj\Debug\net5.0\GradeBook.genruntimeconfig.cache
