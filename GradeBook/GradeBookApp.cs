@@ -8,8 +8,8 @@ namespace GradeBook
     {
         public string CourseName { get; set; }
         public LinkedList<Student> llRoster { get; set; }
-        public List<string> methods = new List<string> () { "Display Roster", "Add Student" , "Remove Student", "Search for Item"};
-        public List<string> searchableCategories = new List<string> () { "Id", "First Name", "Last Name"};
+        public List<string> methods = new List<string> () { "Display Roster", "Add Student" , "Remove Student", "Search for Item", "Filter"};
+        public List<string> searchableCategories = new List<string> () { "Id", "First Name", "Last Name","GPA", "Program"};
         public GradeBookApp(string courseName)
         {
             CourseName = courseName;
@@ -60,6 +60,11 @@ namespace GradeBook
                     SearchForStudent();
                     PromptReset();
                     break; 
+                case 5:
+                    Console.Clear();
+                    FilterList();
+                    PromptReset();
+                    break; 
             }
         }
         private void BuildStudent()
@@ -96,22 +101,35 @@ namespace GradeBook
             Console.Clear();
             UI.DisplayNewStudent(studentToAdd);
         }
-        // convert to get student with overrides
-        // convert remove student
-        private Student SelectStudent()
+        private Student? SelectStudent()
         {
+            Student selectedStudent = null;
             Console.Write("Enter Student Id: ");
             int id = Convert.ToInt32(Console.ReadLine());
-            Student selectedStudent = llRoster.Where(s => s.Id == id).First();
-            return selectedStudent;
+            try
+            {
+                selectedStudent = llRoster.Where(s => s.Id == id).First();
+                return selectedStudent;
+            }
+            catch
+            {
+                return null;
+            }
         }
         private void RemoveStudent()
         {
             UI.DisplayRemoveStudentTitle();
-            Student studentToRemove = SelectStudent();
-            llRoster.Remove(studentToRemove);
-            Console.Clear();
-            UI.DisplayRemovedStudent(studentToRemove);
+            try
+            {
+                Student studentToRemove = SelectStudent();
+                llRoster.Remove(studentToRemove);
+                Console.Clear();
+                UI.DisplayRemovedStudent(studentToRemove);
+            }
+            catch
+            {
+                UI.DisplayStudentNotFound();
+            }
         }
         private void PromptReset()
         {
@@ -121,20 +139,22 @@ namespace GradeBook
         }
         private void SearchForStudent()
         {
-            int category = UI.GetMethod(searchableCategories, "category");
+            List<string> categories = new List<string> () { searchableCategories[0], searchableCategories[1], searchableCategories[2]};
+
+            int category = UI.GetMethod(categories, "category");
 
             switch (category)
             {
                 case 0:
-                    SelectStudent();
                     break;
                 case 1:
-                    string fName = GetName("First");
-                    SearchForFirst(fName);
+                    SearchForId();
                     break;
                 case 2:
-                    string lName = GetName("Last");
-                    SearchForLast(lName);
+                    SearchForName("first");
+                    break;
+                case 3:
+                    SearchForName("last");
                     break;
             }
         }
@@ -154,17 +174,185 @@ namespace GradeBook
             }
             return intToSearch;
         }
-        private void SearchForLast(string lName)
+        private void SearchForName(string searchName)
         {
-            throw new NotImplementedException();
+            Student studentToSearch = null;
+            string nameToSearch = "";
+            try
+            {
+                nameToSearch = GetName(searchName);
+                studentToSearch = llRoster.Where(s => s.FirstName == nameToSearch).First();
+                UI.DisplayStudentFound(studentToSearch);
+            }
+            catch
+            {
+                UI.DisplayStudentNotFound();
+            }
         }
-        private void SearchForFirst(string fName)
+        private void SearchForId()
         {
-            throw new NotImplementedException();
+            Student foundStudent = SelectStudent();
+            if(foundStudent != null)
+            {
+                UI.DisplayStudentFound(foundStudent);
+            }
+            else
+            {
+                UI.DisplayStudentNotFound();
+            }
         }
-        private void SearchForId(int id)
+        private void FilterList()
         {
+            int category = UI.GetMethod(searchableCategories, "category");
+            LinkedList<Student> filteredList = null;
+            switch (category)
+            {
+                case 0:
+                    break;
+                case 1:
+                    filteredList = FilterListById();
+                    break;
+                case 2:
+                    filteredList = FilterListBy("first");
+                    break;
+                case 3:
+                    filteredList = FilterListBy("last");
+                    break;
+                case 4:
+                    filteredList = FilterListByGPA();
+                    break;
+                case 5:
+                    filteredList = FilterListBy("program");
+                    break;
+            }
+            if (filteredList.Count > 0)
+            {
+                Console.Clear();
+                UI.DisplayRoster(filteredList);
+            }
+            else
+            {
+                Console.Clear();
+                UI.DisplayStudentNotFound();
+            }
+        }
+        public LinkedList<Student>? FilterListById()
+        {
+            int lowId = GetLowIdBound();
+            int highId = GetHighIdBound();
+            List<Student> filteredList = llRoster.Where(s => s.Id >= lowId && s.Id <= highId).ToList();
+            LinkedList<Student> llFilteredList = null;
+
+            if (filteredList != null)
+            {
+                llFilteredList = new LinkedList<Student>();
+                foreach(Student student in filteredList)
+                {
+                    llFilteredList.AddLast(student);
+                }
+            }
+            return llFilteredList;
+            
+        }
+        public int GetLowIdBound()
+        {
+            bool isInt = false;
+            int id = -1;
+            while (!isInt)
+            {
+                Console.Write("Enter the low bound: ");
+                isInt = Int32.TryParse(Console.ReadLine(), out id);
+            }
+            return id;
+        }
+        public int GetHighIdBound()
+        {
+            bool isInt = false;
+            int id = -1;
+            while (!isInt)
+            {
+                Console.Write("Enter the high bound: ");
+                isInt = Int32.TryParse(Console.ReadLine(), out id);
+            }
+            return id;
+        }
+        public LinkedList<Student> FilterListByGPA()
+        {
+            // Not Finished: TEST
             throw new NotImplementedException();
+
+
+            double lowGpa = GetLowGPABound();
+            double highGpa = GetHighIdBound();
+            List<Student> filteredList = llRoster.Where(s => s.Gpa >= lowGpa && s.Gpa <= lowGpa).ToList();
+            LinkedList<Student> llFilteredList = null;
+
+            if (filteredList != null)
+            {
+                llFilteredList = new LinkedList<Student>();
+                foreach(Student student in filteredList)
+                {
+                    llFilteredList.AddLast(student);
+                }
+            }
+            return llFilteredList;
+        }
+        
+        public LinkedList<Student> FilterListBy(string subFilter)
+        {
+            // Not Finished: TEST
+            throw new NotImplementedException();
+
+
+            Console.Write($"Enter {subFilter} to search for: ");
+            string searchString = Console.ReadLine();
+            List<Student> filteredList;
+            if (subFilter == "first")
+            {
+                filteredList = llRoster.Where(s => s.FirstName.Contains(searchString)).ToList();
+            }
+            else
+            {
+                filteredList = llRoster.Where(s => s.LastName.Contains(searchString)).ToList();
+            }
+            
+            LinkedList<Student> llFilteredList = new LinkedList<Student>();
+
+            if (filteredList != null)
+            {
+                foreach(Student student in filteredList)
+                {
+                    llFilteredList.AddLast(student);
+                }
+            }
+            return llFilteredList;
+        }
+        public double GetLowGPABound()
+        {
+            bool isInt = false;
+            double lowGpa = -1;
+            while (!isInt)
+            {
+                Console.Write("Enter the low bound: ");
+                isInt = Double.TryParse(Console.ReadLine(), out lowGpa);
+            }
+            return lowGpa;
+        }
+        public double GetHighGPABound()
+        {
+            bool isInt = false;
+            double highGpa = -1;
+            while (!isInt)
+            {
+                Console.Write("Enter the high bound: ");
+                isInt = Double.TryParse(Console.ReadLine(), out highGpa);
+            }
+            return highGpa;
         }
     }
 }
+
+// TEST FILTERS
+    // ID
+    // NAME
+    // GPA

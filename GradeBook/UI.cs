@@ -24,10 +24,12 @@ namespace GradeBook
         }
         public static void DisplayCategoryTitle()
         {
+            DisplayHeader();
             Console.WriteLine(space);
             Console.WriteLine("*                  Category                    *");
             Console.WriteLine(space);
             Console.WriteLine(line);
+            Console.WriteLine();
         }
         public static void DisplayMenuTitle()
         {
@@ -51,6 +53,22 @@ namespace GradeBook
             DisplayHeader();
             Console.WriteLine(space);
             Console.WriteLine("*               Student Added                  *");
+            Console.WriteLine(space);
+            Console.WriteLine(line);
+        }
+        public static void DisplayFoundStudentTitle()
+        {
+            DisplayHeader();
+            Console.WriteLine(space);
+            Console.WriteLine("*               Student Found                  *");
+            Console.WriteLine(space);
+            Console.WriteLine(line);
+        }
+        public static void DisplayStudentNotFoundTitle()
+        {
+            DisplayHeader();
+            Console.WriteLine(space);
+            Console.WriteLine("*             Student Not Found                *");
             Console.WriteLine(space);
             Console.WriteLine(line);
         }
@@ -112,14 +130,14 @@ namespace GradeBook
 
             for (int i = 0; i < methods.Count; i++)
             {
-                Console.WriteLine($" {i+1}) {methods[i]}");
+                Console.WriteLine($"{i+1}) {methods[i]}");
             }
 
-            Console.WriteLine(" 0) Exit");
+            Console.WriteLine("0) Exit");
 
             while (success == false)
             {
-                Console.Write(" Choice: ");
+                Console.Write("Choice: ");
                 success = Int32.TryParse(Console.ReadLine(), out choice);
                 if(success == false)
                 {
@@ -138,6 +156,17 @@ namespace GradeBook
         {
             RemovedStudentTitle();
             DisplayStudent(studentToRemove);
+        }
+        public static void DisplayStudentFound(Student foundStudent)
+        {
+            Console.Clear();
+            DisplayFoundStudentTitle();
+            DisplayStudent(foundStudent);
+        }
+        public static void DisplayStudentNotFound()
+        {
+            Console.Clear();
+            DisplayStudentNotFoundTitle();
         }
     }
 }
