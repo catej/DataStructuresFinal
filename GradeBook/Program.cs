@@ -1,12 +1,12 @@
 ﻿using System;
-
 namespace GradeBook
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GradeBookApp gradebook = new GradeBookApp("ITDev 154");
+            gradebook.Run();
         }
     }
 }
