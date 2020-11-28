@@ -48,6 +48,73 @@ namespace GradeBook
             Console.WriteLine(line);
             Console.WriteLine();
         }
+        public static string GetAscendDesc(string ascend, string desc)
+        {
+            bool isParsed = false;
+            bool isValid = false;
+            int choice = - 1;
+            string filterType = null;
+
+            while (isParsed == false && isValid == false)
+            {
+
+                Console.WriteLine("Group by: \n");
+                Console.WriteLine("0) Ascending");
+                Console.WriteLine("1) Descending");
+                Console.Write("Choice: ");
+
+                isParsed = Int32.TryParse(Console.ReadLine(), out choice);
+
+                if (choice >= 0 && choice <= 1) 
+                { 
+                    isValid = true;
+                }
+            }
+            switch (choice)
+            {
+                case 0: 
+                    filterType = ascend;
+                    break;
+                case 1: 
+                    filterType = desc;
+                    break;
+                
+            }
+            return filterType;
+        }
+        public static string GetFullOrPart(string full, string part)
+        {
+            bool isParsed = false;
+            bool isValid = false;
+            int choice = - 1;
+            string filterType = null;
+
+            while (isParsed == false && isValid == false)
+            {
+                Console.WriteLine("Sort: \n");
+                Console.WriteLine($"0) {full} ");
+                Console.WriteLine($"1) {part} ");
+                Console.Write("Choice: ");
+
+                isParsed = Int32.TryParse(Console.ReadLine(), out choice);
+
+                if (choice >= 0 && choice <= 1) 
+                { 
+                    isValid = true;
+                }
+            }
+            switch (choice)
+            {
+                case 0: 
+                    filterType = full;
+                    break;
+                case 1: 
+                    filterType = part;
+                    break;
+                
+            }
+            return filterType;
+        }
         public static void AddedStudentTitle()
         {
             DisplayHeader();

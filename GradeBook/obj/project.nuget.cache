@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "w9TMJetx936zIiatrKada2cXYm1F1q+FxaX3Fx2xArfgphJDu3PWzkfoPWdwOm9NAV026CdahrihSGYi9jzbRA==",
+  "dgSpecHash": "+GMPBAtG68hfSKxPuyykUi966/IE3PhMXKv63XJFVuPOINBiCHJNG3iE/UitKOJpvK+RR3yyrmYeZ2qf+nz7qQ==",
   "success": true,
-  "projectFilePath": "H:\\current\\MATC\\2020\\fall\\data_structures\\DataStructuresFinal\\GradeBook\\GradeBook.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/GradeBook.csproj",
+  "expectedPackageFiles": [
+    "/home/jeff/.nuget/packages/microsoft.netcore.app.runtime.win-x64/5.0.0/microsoft.netcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
+    "/home/jeff/.nuget/packages/microsoft.netcore.app.runtime.linux-arm64/5.0.0/microsoft.netcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
+    "/home/jeff/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/5.0.0/microsoft.aspnetcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
+    "/home/jeff/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-arm64/5.0.0/microsoft.aspnetcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
+    "/home/jeff/.nuget/packages/microsoft.netcore.app.host.win-x64/5.0.0/microsoft.netcore.app.host.win-x64.5.0.0.nupkg.sha512",
+    "/home/jeff/.nuget/packages/microsoft.netcore.app.host.linux-arm64/5.0.0/microsoft.netcore.app.host.linux-arm64.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

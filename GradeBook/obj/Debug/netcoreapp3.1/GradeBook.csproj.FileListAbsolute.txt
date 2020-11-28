@@ -1,0 +1,13 @@
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.deps.json
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.runtimeconfig.json
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.runtimeconfig.dev.json
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.dll
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/bin/Debug/netcoreapp3.1/GradeBook.pdb
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.csprojAssemblyReference.cache
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.AssemblyInfoInputs.cache
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.AssemblyInfo.cs
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.csproj.CoreCompileInputs.cache
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.dll
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.pdb
+/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/obj/Debug/netcoreapp3.1/GradeBook.genruntimeconfig.cache

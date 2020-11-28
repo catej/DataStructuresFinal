@@ -6,9 +6,13 @@ namespace GradeBook
 {
     public class GradeBookApp
     {
+        const string ascend = "ascending";
+        const string decend = "decending";
+        const string full = "full";
+        const string partial = "partial";
         public string CourseName { get; set; }
         public LinkedList<Student> llRoster { get; set; }
-        public List<string> methods = new List<string> () { "Display Roster", "Add Student" , "Remove Student", "Search for Item", "Filter"};
+        public List<string> methods = new List<string> () { "Display Roster", "Add Student" , "Remove Student", "Search for Item", "Filter", "Sort"};
         public List<string> searchableCategories = new List<string> () { "Id", "First Name", "Last Name","GPA", "Program"};
         public GradeBookApp(string courseName)
         {
@@ -36,6 +40,15 @@ namespace GradeBook
         }
         public void SelectMethod(int selection)
         {
+            string orderBy = null;
+            string fullOrPart = null;
+
+            if (selection.Equals(6))
+            {
+                fullOrPart = UI.GetFullOrPart(full, partial);
+                orderBy = UI.GetAscendDesc(ascend, decend);
+                selection = 5;
+            }
             switch (selection)
             {
                 case 0:
@@ -62,37 +75,33 @@ namespace GradeBook
                     break; 
                 case 5:
                     Console.Clear();
-                    FilterList();
+                    FilterList(orderBy, fullOrPart);
                     PromptReset();
-                    break; 
+                    break;
             }
         }
         private void BuildStudent()
         {
-            // bool acceptable = false;
-            // bool building = true;
             UI.NewStudentTitle();
             Student newStudent = new Student();
 
-            // while (acceptable == false && building == true){
-                Console.Write("First Name: ");
-                newStudent.FirstName = Console.ReadLine();
+            Console.Write("First Name: ");
+            newStudent.FirstName = Console.ReadLine();
 
-                Console.Write(" Last Name: ");
-                newStudent.LastName = Console.ReadLine();
+            Console.Write(" Last Name: ");
+            newStudent.LastName = Console.ReadLine();
 
-                bool validGPA = false;
-                while(validGPA == false)
-                {
-                    Console.Write("       GPA: ");
-                    double gpa;
-                    validGPA = Double.TryParse(Console.ReadLine(), out gpa);
-                    newStudent.Gpa = gpa;
-                }
-                Console.Write("Department: ");
-                newStudent.Program = Console.ReadLine();
-                newStudent.Id = llRoster.Count + 1;
-            // }
+            bool validGPA = false;
+            while(validGPA == false)
+            {
+                Console.Write("       GPA: ");
+                double gpa;
+                validGPA = Double.TryParse(Console.ReadLine(), out gpa);
+                newStudent.Gpa = gpa;
+            }
+            Console.Write("Department: ");
+            newStudent.Program = Console.ReadLine();
+            newStudent.Id = llRoster.Count + 1;
             AddStudent(newStudent);         
         }
         private void AddStudent(Student studentToAdd)
@@ -180,8 +189,17 @@ namespace GradeBook
             string nameToSearch = "";
             try
             {
-                nameToSearch = GetName(searchName);
-                studentToSearch = llRoster.Where(s => s.FirstName == nameToSearch).First();
+                if (searchName == "first")
+                {
+                    nameToSearch = GetName(searchName);
+                    studentToSearch = llRoster.Where(s => s.FirstName == nameToSearch).First();
+                }
+                else
+                {
+                    nameToSearch = GetName(searchName);
+                    studentToSearch = llRoster.Where(s => s.LastName == nameToSearch).First();
+
+                }
                 UI.DisplayStudentFound(studentToSearch);
             }
             catch
@@ -201,30 +219,32 @@ namespace GradeBook
                 UI.DisplayStudentNotFound();
             }
         }
-        private void FilterList()
+        private void FilterList(string orderBy, string fullOrPart)
         {
             int category = UI.GetMethod(searchableCategories, "category");
             LinkedList<Student> filteredList = null;
+
             switch (category)
             {
                 case 0:
                     break;
                 case 1:
-                    filteredList = FilterListById();
+                    filteredList = FilterListById(orderBy, fullOrPart);
                     break;
                 case 2:
-                    filteredList = FilterListBy("first");
+                    filteredList = FilterListBy("first", orderBy, fullOrPart);
                     break;
                 case 3:
-                    filteredList = FilterListBy("last");
+                    filteredList = FilterListBy("last", orderBy, fullOrPart);
                     break;
                 case 4:
-                    filteredList = FilterListByGPA();
+                    filteredList = FilterListByGPA(orderBy, fullOrPart);
                     break;
                 case 5:
-                    filteredList = FilterListBy("program");
+                    filteredList = FilterListBy("program", orderBy, fullOrPart);
                     break;
             }
+            //  DISPAY LIST
             if (filteredList.Count > 0)
             {
                 Console.Clear();
@@ -236,11 +256,43 @@ namespace GradeBook
                 UI.DisplayStudentNotFound();
             }
         }
-        public LinkedList<Student>? FilterListById()
+        public LinkedList<Student>? FilterListById(string orderBy, string fullOrPart)
         {
-            int lowId = GetLowIdBound();
-            int highId = GetHighIdBound();
-            List<Student> filteredList = llRoster.Where(s => s.Id >= lowId && s.Id <= highId).ToList();
+
+            List<Student> filteredList = null;
+            
+            if (fullOrPart.Equals(full))
+            {
+                if (orderBy.Equals(ascend))
+                {
+                    filteredList = llRoster.OrderBy(s => s.Id).ToList();
+                }
+                else if (orderBy.Equals(decend))
+                {
+                    filteredList = llRoster.OrderBy(s => s.Id).Reverse().ToList();
+                }
+            }
+            else if (fullOrPart.Equals(partial))
+            {
+                int lowId = GetLowIdBound();
+                int highId = GetHighIdBound();
+
+                if (orderBy.Equals(ascend))
+                {
+                    filteredList = llRoster.Where(s => s.Id >= lowId && s.Id <= highId).OrderBy(s => s.Id).ToList();
+                }
+                else if (orderBy.Equals(decend))
+                {
+                    filteredList = llRoster.Where(s => s.Id >= lowId && s.Id <= highId).OrderBy(s => s.Id).Reverse().ToList();
+                }
+            }
+            else
+            {
+                int lowId = GetLowIdBound();
+                int highId = GetHighIdBound();
+                filteredList = llRoster.Where(s => s.Id >= lowId && s.Id <= highId).ToList();
+            }
+
             LinkedList<Student> llFilteredList = null;
 
             if (filteredList != null)
@@ -276,15 +328,42 @@ namespace GradeBook
             }
             return id;
         }
-        public LinkedList<Student> FilterListByGPA()
+        public LinkedList<Student> FilterListByGPA(string orderBy, string fullOrPart)
         {
-            // Not Finished: TEST
-            throw new NotImplementedException();
+            List<Student> filteredList = null;
+            
+            if (fullOrPart.Equals(full))
+            {
+                if (orderBy.Equals(ascend))
+                {
+                    filteredList = llRoster.OrderBy(s => s.Gpa).ToList();
+                }
+                else if (orderBy.Equals(decend))
+                {
+                    filteredList = llRoster.OrderBy(s => s.Gpa).Reverse().ToList();
+                }
+            }
+            else if (fullOrPart.Equals(partial))
+            {
+                double lowGpa = GetLowGPABound();
+                double highGpa = GetHighGPABound();
 
+                if (orderBy.Equals(ascend))
+                {
+                    filteredList = llRoster.Where(s => s.Gpa >= lowGpa && s.Gpa <= highGpa).OrderBy(s => s.Gpa).ToList();
+                }
+                else if (orderBy.Equals(decend))
+                {
+                    filteredList = llRoster.Where(s => s.Gpa >= lowGpa && s.Gpa <= highGpa).OrderBy(s => s.Gpa).Reverse().ToList();
+                }
+            }
+            else
+            {
+                double lowGpa = GetLowGPABound();
+                double highGpa = GetHighGPABound();
+                filteredList = llRoster.Where(s => s.Gpa >= lowGpa && s.Gpa <= highGpa).ToList();
+            }
 
-            double lowGpa = GetLowGPABound();
-            double highGpa = GetHighIdBound();
-            List<Student> filteredList = llRoster.Where(s => s.Gpa >= lowGpa && s.Gpa <= lowGpa).ToList();
             LinkedList<Student> llFilteredList = null;
 
             if (filteredList != null)
@@ -296,26 +375,91 @@ namespace GradeBook
                 }
             }
             return llFilteredList;
-        }
-        
-        public LinkedList<Student> FilterListBy(string subFilter)
-        {
-            // Not Finished: TEST
-            throw new NotImplementedException();
-
-
-            Console.Write($"Enter {subFilter} to search for: ");
-            string searchString = Console.ReadLine();
-            List<Student> filteredList;
-            if (subFilter == "first")
-            {
-                filteredList = llRoster.Where(s => s.FirstName.Contains(searchString)).ToList();
-            }
-            else
-            {
-                filteredList = llRoster.Where(s => s.LastName.Contains(searchString)).ToList();
-            }
             
+        }
+        public LinkedList<Student> FilterListBy(string subFilter, string orderBy, string fullOrPart)
+        {
+            const string first = "first";
+            const string last = "last";
+            const string program = "program";
+
+            List<Student> filteredList = new List<Student>();
+            if (fullOrPart.Equals(full))
+            {
+                if (subFilter.Equals(first))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.OrderBy(s => s.FirstName).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.OrderBy(s => s.FirstName).Reverse().ToList();
+                    }
+                }
+                else if (subFilter.Equals(last))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.OrderBy(s => s.LastName).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.OrderBy(s => s.LastName).Reverse().ToList();
+                    }
+                }
+                else if (subFilter.Equals(program))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.OrderBy(s => s.Program).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.OrderBy(s => s.Program).Reverse().ToList();
+                    }
+                }
+            }
+            else if (fullOrPart.Equals(partial))
+            {
+                Console.Write($"Enter {subFilter} to search for: ");
+                string searchString = Console.ReadLine();
+                
+                if (subFilter.Equals(first))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.Where(s => s.FirstName.Contains(searchString)).OrderBy(s => s.FirstName).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.Where(s => s.FirstName.Contains(searchString)).OrderBy(s => s.FirstName).Reverse().ToList();
+                    }
+                }
+                else if (subFilter.Equals(last))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.Where(s => s.LastName.Contains(searchString)).OrderBy(s => s.LastName).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.Where(s => s.LastName.Contains(searchString)).OrderBy(s => s.LastName).Reverse().ToList();
+                    }
+                }
+                else if (subFilter.Equals(program))
+                {
+                    if (orderBy.Equals(ascend)) 
+                    {
+                        filteredList = llRoster.Where(s => s.Program.Contains(searchString)).OrderBy(s => s.Program).ToList();
+                    }
+                    else if (orderBy.Equals(decend))
+                    {
+                        filteredList = llRoster.Where(s => s.Program.Contains(searchString)).OrderBy(s => s.Program).Reverse().ToList();
+                    }
+                }
+            }
+
             LinkedList<Student> llFilteredList = new LinkedList<Student>();
 
             if (filteredList != null)
@@ -351,8 +495,3 @@ namespace GradeBook
         }
     }
 }
-
-// TEST FILTERS
-    // ID
-    // NAME
-    // GPA
