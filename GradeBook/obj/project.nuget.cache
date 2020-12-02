@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "+GMPBAtG68hfSKxPuyykUi966/IE3PhMXKv63XJFVuPOINBiCHJNG3iE/UitKOJpvK+RR3yyrmYeZ2qf+nz7qQ==",
+  "dgSpecHash": "3LiiTlu13fXu34cwucwvpwJteQ1OKy2vXClh6/+pGVNw5p9COZoLGtwlM0Cotu7LwYucl6+OuI/0QiMR/bxdSg==",
   "success": true,
-  "projectFilePath": "/media/jeff/SCRUISER-32/current/MATC/2020/fall/data_structures/DataStructuresFinal/GradeBook/GradeBook.csproj",
+  "projectFilePath": "H:\\current\\MATC\\2020\\fall\\data_structures\\DataStructuresFinal\\GradeBook\\GradeBook.csproj",
   "expectedPackageFiles": [
-    "/home/jeff/.nuget/packages/microsoft.netcore.app.runtime.win-x64/5.0.0/microsoft.netcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
-    "/home/jeff/.nuget/packages/microsoft.netcore.app.runtime.linux-arm64/5.0.0/microsoft.netcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
-    "/home/jeff/.nuget/packages/microsoft.aspnetcore.app.runtime.win-x64/5.0.0/microsoft.aspnetcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
-    "/home/jeff/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-arm64/5.0.0/microsoft.aspnetcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
-    "/home/jeff/.nuget/packages/microsoft.netcore.app.host.win-x64/5.0.0/microsoft.netcore.app.host.win-x64.5.0.0.nupkg.sha512",
-    "/home/jeff/.nuget/packages/microsoft.netcore.app.host.linux-arm64/5.0.0/microsoft.netcore.app.host.linux-arm64.5.0.0.nupkg.sha512"
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\5.0.0\\microsoft.netcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm64\\5.0.0\\microsoft.netcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\5.0.0\\microsoft.windowsdesktop.app.runtime.win-x64.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\5.0.0\\microsoft.aspnetcore.app.runtime.win-x64.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm64\\5.0.0\\microsoft.aspnetcore.app.runtime.linux-arm64.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jeff\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm64\\5.0.0\\microsoft.netcore.app.host.linux-arm64.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
